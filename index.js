@@ -19,14 +19,26 @@ const headers = {
 
 
 // * Code for Route 1 goes here
-
+app.get('/', async (req, res) => {
+    const url = `https://api.hubspot.com/crm/v3/objects/${OBJECT_TYPE_ID}?properties=pet_name,pet_food,pet_type`;
+    try {
+        const response = await axios.get(url, { headers });
+        res.render("homepage", {
+          title: "Lovely Pets | Integrating With HubSpot I Practicum",
+          pets: response.data.results || [],
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    });
+    
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 app.get("/update-cobj", (req, res) => {
     res.render("updates", {
       title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
     });
   });
-  
+
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 app.post("/update-cobj", async (req, res) => {
