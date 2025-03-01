@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+
+    div.container
+      h1 🐾 Lovely Pets Table 🐾
+
+      if pets.length > 0 
+        table.pets-table
+          thead
+            tr
+              th Pet Name
+              th Pet Food
+              th Pet Type
+          tbody
+            each pet in pets
+              tr
+                td= pet.properties.pet_name || "No name"
+                td= pet.properties.pet_food || "Unknown"
+                td= pet.properties.pet_type || "Unknown"
+        
+
+      else
+        p No pets available. Please add a pet! 🐶🐱
+
+      a(href="/update-cobj" class="button") ➕ Add to this table
